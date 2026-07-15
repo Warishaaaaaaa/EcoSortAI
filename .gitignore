@@ -8,7 +8,7 @@ __pycache__/
 *.so
 venv/
 .env
-
+--
 # ----------------------------
 # React / Node
 # ----------------------------
@@ -41,3 +41,5 @@ Thumbs.db
 # ----------------------------
 *.h5
 *.keras
+# Jupyter
+.ipynb_checkpoints/
