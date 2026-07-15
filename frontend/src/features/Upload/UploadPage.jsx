@@ -1,28 +1,57 @@
 import { useState } from "react";
 
 import UploadForm from "./UploadForm";
-import PredictionCard from "../Prediction/PredictionCard";
+import ImagePreview from "./ImagePreview";
 
 export default function UploadPage() {
+  const [selectedImage, setSelectedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
 
-  return (
-    <section className="bg-slate-50 py-20">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold">Upload Waste Image</h1>
+  function clearPrediction() {
+    setSelectedImage(null);
+    setPrediction(null);
+  }
 
-          <p className="mt-4 text-gray-600">
-            Upload an image and classify it using AI.
+  return (
+    <main className="min-h-screen bg-slate-100 py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Page Heading */}
+
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-slate-900">
+            AI Waste Classification
+          </h1>
+
+          <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+            Upload an image of waste material and let EcoSortAI identify its
+            category using our trained Artificial Intelligence model.
           </p>
         </div>
 
-        <div className="mt-16">
-          <UploadForm setPrediction={setPrediction} />
+        {/* Main Grid */}
 
-          <PredictionCard prediction={prediction} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Upload Card */}
+
+          <div className="bg-white rounded-3xl shadow-xl p-8">
+            <UploadForm
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+              setPrediction={setPrediction}
+            />
+          </div>
+
+          {/* Preview Card */}
+
+          <div className="bg-white rounded-3xl shadow-xl p-8">
+            <ImagePreview
+              selectedImage={selectedImage}
+              prediction={prediction}
+              clearPrediction={clearPrediction}
+            />
+          </div>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

@@ -1,13 +1,15 @@
-ALLOWED_EXTENSIONS = {
-    "png",
-    "jpg",
-    "jpeg",
-}
+from config import ALLOWED_EXTENSIONS
 
 
 def allowed_file(filename):
-    return (
-        "." in filename
-        and filename.rsplit(".", 1)[1].lower()
-        in ALLOWED_EXTENSIONS
-    )
+    """
+    Check whether the uploaded file
+    has an allowed extension.
+    """
+
+    if "." not in filename:
+        return False
+
+    extension = filename.rsplit(".", 1)[1].lower()
+
+    return extension in ALLOWED_EXTENSIONS

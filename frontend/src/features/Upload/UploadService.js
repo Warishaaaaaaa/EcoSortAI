@@ -1,9 +1,9 @@
 import api from "../../services/api";
 
-export async function classifyWaste(image) {
+export async function uploadImage(imageFile) {
   const formData = new FormData();
 
-  formData.append("image", image);
+  formData.append("image", imageFile);
 
   const response = await api.post("/predict", formData, {
     headers: {

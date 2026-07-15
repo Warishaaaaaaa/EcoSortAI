@@ -1,0 +1,6 @@
+- [ ] Inspect backend/service code for syntax/runtime issues
+- [ ] Fix Python syntax error(s) in backend/services/prediction_service.py
+- [ ] Fix missing return indentation/name issues in prediction_service.py
+- [ ] Add safe cleanup/error handling around uploaded image deletion
+- [ ] Re-run backend syntax check (py_compile)
+- [ ] Run frontend lint/build checks (if applicable)
