@@ -26,3 +26,11 @@ def delete_history(prediction_id):
     return jsonify({
         "message": "Prediction deleted successfully."
     })
+@history_bp.route("/history", methods=["DELETE"])
+def delete_all_history():
+
+    clear_history()
+
+    return jsonify({
+        "message": "History cleared successfully."
+    })
