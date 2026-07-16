@@ -1,7 +1,13 @@
-import tensorflow as tf
-import numpy as np
-from PIL import Image
 import os
+
+import numpy as np
+import tensorflow as tf
+from PIL import Image
+
+try:
+    from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+except ImportError:
+    from keras.applications.mobilenet_v2 import preprocess_input
 
 from config import MODEL_PATH
 from models.prediction_model import save_prediction
@@ -28,11 +34,13 @@ def preprocess_image(image_path):
 
     image = image.convert("RGB")
 
+    # Same image size expected by the loaded model
     image = image.resize((224, 224))
 
-    image = np.array(image)
+    image = np.array(image).astype("float32")
 
-    image = image.astype("float32")
+    # Same preprocessing used during training
+    image = preprocess_input(image)
 
     image = np.expand_dims(image, axis=0)
 
@@ -50,7 +58,8 @@ def predict_image(image_path):
 
     predicted_class = CLASS_NAMES[index]
 
-    if confidence < 80:
+    # Lower confidence threshold
+    if confidence < 60:
         predicted_class = "Unknown"
 
     image_name = os.path.basename(image_path)
@@ -60,6 +69,14 @@ def predict_image(image_path):
         prediction=predicted_class,
         confidence=round(confidence, 2),
     )
+
+    # Debug information
+    print("=" * 60)
+    print("Prediction Probabilities:")
+    print(prediction)
+    print(f"Predicted Class : {predicted_class}")
+    print(f"Confidence      : {confidence:.2f}%")
+    print("=" * 60)
 
     return {
         "prediction": predicted_class,

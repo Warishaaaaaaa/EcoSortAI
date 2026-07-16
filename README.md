@@ -215,13 +215,10 @@ python app.py
 - Paper
 - Plastic
 
-> **Note:** The current model was trained on the initial dataset. Before deployment, it will be retrained on a larger dataset to improve prediction accuracy and generalization.
-
 ---
 
 # 📈 Future Improvements
 
-- 🔄 Retrain model on larger dataset
 - ♻️ Support more waste categories
 - 📦 Batch image prediction
 - 👤 User authentication
